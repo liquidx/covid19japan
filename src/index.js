@@ -4,6 +4,23 @@ const tippy = require('tippy.js').default
 
 // fetch polyfill only needs an import.
 import 'whatwg-fetch'
+import mapboxgl from 'mapbox-gl';
+import * as Sentry from '@sentry/browser';
+import * as Integrations from '@sentry/integrations';
+
+
+console.log(window.location.hostname)
+if (window.location.hostname == 'covid19japan.com') {
+  Sentry.init({
+    dsn: 'https://1c7127f5f5b2432d99a5bf44a3b74d08@sentry.io/2967034',
+    debug: false,
+    integrations: [
+      new Integrations.CaptureConsole({
+        levels: ['error']
+      })
+    ]
+  })
+}
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicmV1c3RsZSIsImEiOiJjazZtaHE4ZnkwMG9iM3BxYnFmaDgxbzQ0In0.nOiHGcSCRNa9MD9WxLIm7g'
