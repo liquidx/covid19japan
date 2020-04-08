@@ -6,6 +6,10 @@ html {
   color: rgb(120, 120, 120);
 }
 
+a {
+  color: rgba(200, 0, 0, 1);
+}
+
 body {
   box-sizing: border-box;
   display: flex;
@@ -23,6 +27,7 @@ h2 {
   color: rgb(120, 120, 120);
   margin-top: 40px;
 }
+
 
 .explaination {
   font-size: 0.8em;
@@ -44,6 +49,10 @@ h2 {
   }
 
   .c3-chart-line {
+    stroke-width: 2px;
+  }
+
+  .c3-focused.c3-chart-line path {
     stroke-width: 2px;
   }
 
@@ -69,9 +78,12 @@ h2 {
 
 }
 
+.hint {
+  color: #aaaaaa;
+}
 
 
-#age-trends {
+#age-trend {
   .chart {
     width: 500px;
     height: 500px;
@@ -79,10 +91,25 @@ h2 {
 
   .chart-date-slider {
     width: 500px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
 
-    #chart-date-label {
+    #age-trend-chart-date-label {
       font-size: 0.8em;
-      padding: 10px 0;
+      padding: 0px 5px;
+      color: rgba(200, 0, 0, 1);
+      width: 8em;
+    }
+
+    #age-trend-play-toggle {
+      font-size: 0.8em;
+      width: 7em;
+    }
+
+    #age-date-slider {
+      width: 400px;
     }
 
     .rangeslider__fill,

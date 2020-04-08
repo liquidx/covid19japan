@@ -8,9 +8,7 @@ import {
   addDays as dateAddDays,
 } from "date-fns";
 
-const renderPatientRow = (patient) => {
-  let row = document.createElement("tr");
-};
+import { renderAgeTrends, keyboardEventForRangeSlider } from "./trendsAge.js";
 
 const patientsByDate = (patients) => {
   let dailySummary = {};
@@ -50,7 +48,6 @@ const calculateAgeTrends = (patients) => {
     );
     for (let patient of patientsByDay) {
       if (
-        typeof patient.ageBracket != "undefined" &&
         patient.ageBracket >= 0 &&
         AGE_BUCKETS.indexOf(patient.ageBracket) != -1
       ) {
@@ -111,123 +108,6 @@ const calculateAgeTrends = (patients) => {
   });
 
   return ageBreakdowns;
-};
-
-let _ageDateSelection = "2020-03-01";
-let _ageLineColor = "rgba(0, 0, 0, 0.05)";
-let _ageLineFocusColor = "rgba(200, 0, 0, 1)";
-let _ageBreakdowns = {};
-let _ageTrendChart = null;
-let _ageTrendSlider = null;
-
-const renderAgeTrends = (ageBreakdowns) => {
-  let chartElement = document.querySelector("#age-trends .chart");
-  _ageBreakdowns = _.slice(ageBreakdowns, 30); // ignore the first 30 days.
-  let ageData = _.map(_ageBreakdowns, (v) => {
-    return _.concat([v.date], v.ageAccumulatorFractions);
-  });
-
-  document.querySelector("#chart-date-label").innerHTML = _ageDateSelection;
-
-  let lineColors = _.fromPairs(
-    _.map(_ageBreakdowns, (v) => {
-      if (v.date == _ageDateSelection) {
-        return [v.date, _ageLineFocusColor];
-      }
-      return [v.date, _ageLineColor];
-    })
-  );
-
-  _ageTrendChart = c3.generate({
-    bindto: chartElement,
-    padding: { top: 20, bottom: 20, left: 60, right: 0 },
-    data: {
-      type: "spline",
-      columns: ageData,
-      colors: lineColors,
-      selection: true,
-    },
-    axis: {
-      y: {
-        min: 0,
-        max: 0.4,
-        label: {
-          text: "Cases %",
-          position: "outer-middle",
-        },
-        padding: { top: 0, bottom: 0, left: 0, right: 0 },
-        tick: {
-          count: 5,
-          format: (d) => {
-            return parseInt(d * 100) + "%";
-          },
-        },
-      },
-      x: {
-        label: {
-          text: "Age",
-          position: "outer-center",
-        },
-        padding: { top: 0, bottom: 0, left: 0, right: 0 },
-        values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-        tick: {
-          format: (d) => {
-            return d * 10;
-          },
-        },
-      },
-    },
-    tooltip: { show: false },
-    legend: { show: false },
-    point: { show: false },
-  });
-
-  rangesliderJs.create(document.querySelector("#age-date-slider"), {
-    min: 0,
-    max: _ageBreakdowns.length - 1,
-    value: _.keys(_ageBreakdowns).indexOf(_ageDateSelection),
-    step: 1,
-    onSlide: (value, percent, position) => {
-      updateAgeChartSelection(value);
-    },
-  });
-};
-
-const updateAgeChartSelection = (value) => {
-  _ageDateSelection = _ageBreakdowns[value].date;
-  let colors = _.fromPairs(
-    _.map(_ageBreakdowns, (v) => {
-      if (v.date == _ageDateSelection) {
-        return [v.date, _ageLineFocusColor];
-      }
-      return [v.date, _ageLineColor];
-    })
-  );
-  _ageTrendChart.data.colors(colors);
-  _ageTrendChart.focus([_ageDateSelection]);
-
-  document.querySelector("#chart-date-label").innerHTML = _ageDateSelection;
-};
-
-const keyboardEventForRangeSlider = (e) => {
-  e = e || window.event;
-
-  let slider = document.querySelector("#age-date-slider");
-  if (!slider) {
-    return;
-  }
-
-  if (e.keyCode == "37") {
-    // left arrow
-    let newValue = Math.max(parseInt(slider.value) - 1, parseInt(slider.min));
-    slider["rangeslider-js"].update({ value: newValue });
-    updateAgeChartSelection(newValue);
-  } else if (e.keyCode == "39") {
-    // right arrow
-    let newValue = Math.min(parseInt(slider.value) + 1, parseInt(slider.max));
-    slider["rangeslider-js"].update({ value: newValue });
-    updateAgeChartSelection(newValue);
-  }
 };
 
 const main = () => {
