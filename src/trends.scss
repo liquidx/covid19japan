@@ -6,10 +6,6 @@ html {
   color: rgb(120, 120, 120);
 }
 
-a {
-  color: rgba(200, 0, 0, 1);
-}
-
 body {
   box-sizing: border-box;
   display: flex;
@@ -17,18 +13,16 @@ body {
 }
 
 h1 {
-  font-size: 0.9em;
-  font-weight: 600;
-  color: rgb(68, 68, 68);
+  font-size: 1.0em;
+  color: rgb(140, 140, 140);
 }
 
 h2 {
   font-size: 0.9em;
   font-weight: 600;
-  color: rgb(90, 90, 90);
+  color: rgb(120, 120, 120);
   margin-top: 40px;
 }
-
 
 .explaination {
   font-size: 0.8em;
@@ -53,10 +47,6 @@ h2 {
     stroke-width: 2px;
   }
 
-  .c3-focused.c3-chart-line path {
-    stroke-width: 3px;
-  }
-
   .c3-shapes {
     fill: none;
   }
@@ -79,12 +69,9 @@ h2 {
 
 }
 
-.hint {
-  color: #aaaaaa;
-}
 
 
-#age-trend {
+#age-trends {
   .chart {
     width: 500px;
     height: 500px;
@@ -92,25 +79,10 @@ h2 {
 
   .chart-date-slider {
     width: 500px;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    align-items: center;
 
-    #age-trend-chart-date-label {
+    #chart-date-label {
       font-size: 0.8em;
-      padding: 0px 5px;
-      color: rgba(200, 0, 0, 1);
-      width: 8em;
-    }
-
-    #age-trend-play-toggle {
-      font-size: 0.8em;
-      width: 7em;
-    }
-
-    #age-date-slider {
-      width: 400px;
+      padding: 10px 0;
     }
 
     .rangeslider__fill,
@@ -121,79 +93,7 @@ h2 {
     .rangslide__handle:active {
       background: rgba(200, 0, 0, 0.5);
     }
-  }
 
-  .footer {
-    margin-top: 60px;
-  }
-}
 
-#death-trend {
-  .c3 .c3-legend-item-tile {
-    stroke-width: 10px;
-  }
-
-  .c3 .c3-legend-item text {
-    fill: #aaaaaa;
-    font-size: 10px;
-  }
-}
-
-#tokyo-cities {
-  #unified-chart {
-    width: 800px;
-    height: 600px;
-  }
-
-  #charts {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    
-    .chart {
-      width: 200px;
-      height: 200px;
-      margin: 10px 10px 10px 10px;
-    }  
-
-    .c3 .c3-legend-item text {
-      fill: #858585;
-      font-size: 12px;
-    }
-
-    .c3-lines .c3-line  {
-      stroke-width: 2px;
-    }
-
-    path, line {
-      fill: none;
-      stroke: #7e7e7e;
-      stroke-width: 1px;
-    }
-
-  }
-
-  #count-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0px;
-    font-size: 1.0em;
-
-    thead tr {
-      font-weight: bold;
-      color: rgb(33, 33, 33);
-      background-color: rgb(225, 227, 228);
-    }
-
-    tr {
-      padding: 5px;
-    }
-  
-    tr:nth-child(even), tbody#unspecified-rows tr {
-      background-color: rgb(244,247,248);
-    }
-    td {
-      padding: 10px 10px;
-    }
   }
 }

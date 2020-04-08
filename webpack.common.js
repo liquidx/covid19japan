@@ -8,9 +8,7 @@ module.exports = {
   mode: "development",
   entry: {
     index: ["./src/index.js", "./src/index.scss"],
-    tokyo: ["./src/tokyo.js", "./src/trends.scss"],
-    ageTrends: ["./src/ageTrends.js", "./src/trends.scss"],
-    deathTrends: ["./src/deathTrends.js", "./src/trends.scss"],
+    trends: ["./src/trends.js", "./src/trends.scss"],
   },
   output: {
     path: path.resolve(__dirname, "docs"),
@@ -30,19 +28,9 @@ module.exports = {
       chunks: ["index"],
     }),
     new HtmlWebpackPlugin({
-      filename: "tokyo.html",
-      template: "src/tokyo.html",
-      chunks: ["tokyo"],
-    }),
-    new HtmlWebpackPlugin({
-      filename: "ageTrends.html",
-      template: "src/ageTrends.html",
-      chunks: ["ageTrends"],
-    }),
-    new HtmlWebpackPlugin({
-      filename: "deathTrends.html",
-      template: "src/deathTrends.html",
-      chunks: ["deathTrends"],
+      filename: "trends.html",
+      template: "src/trends.html",
+      chunks: ["trends"],
     }),
     new HtmlWebpackPlugin({
       bodyClass: "embed",
