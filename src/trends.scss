@@ -1,0 +1,99 @@
+@import "../node_modules/rangeslider-js/dist/styles.min.css";
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.0em;
+  color: rgb(120, 120, 120);
+}
+
+body {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 1.0em;
+  color: rgb(140, 140, 140);
+}
+
+h2 {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: rgb(120, 120, 120);
+  margin-top: 40px;
+}
+
+.explaination {
+  font-size: 0.8em;
+  max-width: 400px;
+}
+
+#page {
+  min-width: 600px;
+  max-width: 800px;  
+  padding: 60px 30px;
+}
+
+// Chart styles
+.c3 {
+  path, line {
+    fill: none;
+    stroke: #999999;
+    stroke-width: 1px;
+  }
+
+  .c3-chart-line {
+    stroke-width: 2px;
+  }
+
+  .c3-shapes {
+    fill: none;
+  }
+
+  .tick tspan,
+  .c3-axis-x-label,
+  .c3-axis-y-label {
+    fill: #aaaaaa;
+    font-size: 10px;
+  }
+
+  .c3-axis .domain {
+    stroke: #aaaaaa;
+  }
+
+// .c3-axis .domain {
+//   stroke-width: 1px;
+//   //fill-opacity: 0;
+// }
+
+}
+
+
+
+#age-trends {
+  .chart {
+    width: 500px;
+    height: 500px;
+  }
+
+  .chart-date-slider {
+    width: 500px;
+
+    #chart-date-label {
+      font-size: 0.8em;
+      padding: 10px 0;
+    }
+
+    .rangeslider__fill,
+    .rangeslider__handle {
+      background: rgba(200, 0, 0, 1);
+    }
+
+    .rangslide__handle:active {
+      background: rgba(200, 0, 0, 0.5);
+    }
+
+
+  }
+}
