@@ -1,5 +1,6 @@
 import c3 from "c3";
-import d3 from "d3";
+import { interpolateRgb } from "d3-interpolate";
+import { color as d3color } from "d3-color";
 import _ from "lodash";
 import rangesliderJs from "rangeslider-js";
 import {
@@ -9,11 +10,13 @@ import {
 } from "date-fns";
 
 let _ageDateSelection = "2020-03-01";
-let _ageLineColor = "rgba(0, 0, 0, 0.05)";
-let _ageLineFocusColor = "rgba(200, 0, 0, 1)";
 let _ageBreakdowns = {};
 let _ageTrendChart = null;
 let _ageTrendAnimationPlayTimer = null;
+let _ageLineColors = {};
+
+let _agePastColor = "#fdae61";
+let _ageRecentColor = "#9e0142";
 
 export const renderAgeTrends = (ageBreakdowns) => {
   let chartElement = document.querySelector("#age-trend .chart");
@@ -25,14 +28,15 @@ export const renderAgeTrends = (ageBreakdowns) => {
   console.log(_ageBreakdowns);
 
   _ageDateSelection = ageData[0][0];
-  let lineColors = _.fromPairs(
-    _.map(_ageBreakdowns, (v) => {
-      if (v.date == _ageDateSelection) {
-        return [v.date, _ageLineFocusColor];
-      }
-      return [v.date, _ageLineColor];
-    })
-  );
+  let lineColorPairs = [];
+  let colorInterpolator = interpolateRgb(_agePastColor, _ageRecentColor);
+  for (let i = 0; i < ageData.length; i++) {
+    let color = d3color(colorInterpolator(i / ageData.length));
+    color.opacity = 0.2;
+    lineColorPairs.push([ageData[i][0], color.formatRgb()]);
+  }
+  _ageLineColors = _.fromPairs(lineColorPairs);
+  console.log(_ageLineColors);
 
   _ageTrendChart = c3.generate({
     bindto: chartElement,
@@ -41,7 +45,7 @@ export const renderAgeTrends = (ageBreakdowns) => {
     data: {
       type: "spline",
       columns: ageData,
-      colors: lineColors,
+      colors: _.clone(_ageLineColors),
       selection: true,
     },
     axis: {
@@ -89,6 +93,10 @@ export const renderAgeTrends = (ageBreakdowns) => {
     },
   });
 
+  let rangeSliderFill = document.querySelector(".rangeslider__fill");
+  rangeSliderFill.style.background =
+    "linear-gradient(90deg, rgba(253,174,97,1) 0%, rgba(158,1,66,1) 100%)";
+
   let startStop = document.querySelectorAll("#age-trend-start-stop");
   _.forEach(startStop, (v) => {
     return v.addEventListener("click", toggleAnimation);
@@ -101,14 +109,15 @@ export const renderAgeTrends = (ageBreakdowns) => {
 
 export const updateAgeChartSelection = (value) => {
   _ageDateSelection = _ageBreakdowns[value].date;
-  let colors = _.fromPairs(
-    _.map(_ageBreakdowns, (v) => {
-      if (v.date == _ageDateSelection) {
-        return [v.date, _ageLineFocusColor];
-      }
-      return [v.date, _ageLineColor];
-    })
-  );
+
+  let highlightColor = d3color(_ageLineColors[_ageDateSelection]);
+  highlightColor.opacity = 1.0;
+
+  let colors = _.clone(_ageLineColors);
+  colors[_ageDateSelection] = highlightColor.formatRgb();
+
+  console.log(_ageLineColors);
+
   _ageTrendChart.data.colors(colors);
   _ageTrendChart.focus([_ageDateSelection]);
 
@@ -134,7 +143,7 @@ const toggleAnimation = (e) => {
         clearTimeout(_ageTrendAnimationPlayTimer);
         _ageTrendAnimationPlayTimer = null;
       }
-    }, 330);
+    }, 200);
   } else {
     console.log("stop");
     clearTimeout(_ageTrendAnimationPlayTimer);
