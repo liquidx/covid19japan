@@ -27,6 +27,7 @@
     "lodash": "^4.17.15",
     "rangeslider-js": "^3.2.5",
     "tippy.js": "^6.1.0",
+    "twemoji": "^12.1.5",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
