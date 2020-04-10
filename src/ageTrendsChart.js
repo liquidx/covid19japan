@@ -3,11 +3,6 @@ import { interpolateRgb } from "d3-interpolate";
 import { color as d3color } from "d3-color";
 import _ from "lodash";
 import rangesliderJs from "rangeslider-js";
-import {
-  parse as dateParse,
-  format as dateFormat,
-  addDays as dateAddDays,
-} from "date-fns";
 
 let _ageDateSelection = "2020-03-01";
 let _ageBreakdowns = {};

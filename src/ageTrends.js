@@ -1,14 +1,14 @@
-import c3 from "c3";
-import d3 from "d3";
 import _ from "lodash";
-import rangesliderJs from "rangeslider-js";
 import {
   parse as dateParse,
   format as dateFormat,
   addDays as dateAddDays,
 } from "date-fns";
 
-import { renderAgeTrends, keyboardEventForRangeSlider } from "./trendsAge.js";
+import {
+  renderAgeTrends,
+  keyboardEventForRangeSlider,
+} from "./ageTrendsChart.js";
 
 const patientsByDate = (patients) => {
   let dailySummary = {};
