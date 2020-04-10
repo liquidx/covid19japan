@@ -156,3 +156,14 @@ h2 {
     }
   }
 }
+
+#death-trend {
+  .c3 .c3-legend-item-tile {
+    stroke-width: 10px;
+  }
+
+  .c3 .c3-legend-item text {
+    fill: #aaaaaa;
+    font-size: 10px;
+  }
+}

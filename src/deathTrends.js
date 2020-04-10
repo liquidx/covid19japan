@@ -68,7 +68,7 @@ const generateChartData = (deaths) => {
 let _deathsChart = null;
 const renderDeaths = (deaths) => {
   let deathsChartData = generateChartData(_.slice(deaths, 40, -2));
-  console.log(deaths);
+  console.log(deathsChartData);
 
   let chartElement = document.querySelector("#death-trend .chart");
   _deathsChart = c3.generate({
