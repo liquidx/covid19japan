@@ -50,6 +50,10 @@ export const drawTravelRestrictions = (ddb) => {
     "#other-restrictions",
     ddb.travelRestrictions.japan.other
   );
+  // replace emoji with twemoji on windows
+  if (navigator.oscpu.toLowerCase().contains("windows")) {
+    twemoji.parse("#travel-restrictions");
+  }
 };
 
 export default drawTravelRestrictions;
