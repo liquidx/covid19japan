@@ -8,6 +8,7 @@ module.exports = {
   mode: "development",
   entry: {
     index: ["./src/index.js", "./src/index.scss"],
+    tokyo: ["./src/tokyo.js", "./src/trends.scss"],
     ageTrends: ["./src/ageTrends.js", "./src/trends.scss"],
     deathTrends: ["./src/deathTrends.js", "./src/trends.scss"],
   },
@@ -27,6 +28,11 @@ module.exports = {
       filename: "index.html",
       template: "src/index.html",
       chunks: ["index"],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "tokyo.html",
+      template: "src/tokyo.html",
+      chunks: ["tokyo"],
     }),
     new HtmlWebpackPlugin({
       filename: "ageTrends.html",
