@@ -138,3 +138,62 @@ h2 {
     font-size: 10px;
   }
 }
+
+#tokyo-cities {
+  #unified-chart {
+    width: 800px;
+    height: 600px;
+  }
+
+  #charts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    .chart {
+      width: 200px;
+      height: 200px;
+      margin: 10px 10px 10px 10px;
+    }  
+
+    .c3 .c3-legend-item text {
+      fill: #858585;
+      font-size: 12px;
+    }
+
+    .c3-lines .c3-line  {
+      stroke-width: 2px;
+    }
+
+    path, line {
+      fill: none;
+      stroke: #7e7e7e;
+      stroke-width: 1px;
+    }
+
+  }
+
+  #count-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0px;
+    font-size: 1.0em;
+
+    thead tr {
+      font-weight: bold;
+      color: rgb(33, 33, 33);
+      background-color: rgb(225, 227, 228);
+    }
+
+    tr {
+      padding: 5px;
+    }
+  
+    tr:nth-child(even), tbody#unspecified-rows tr {
+      background-color: rgb(244,247,248);
+    }
+    td {
+      padding: 10px 10px;
+    }
+  }
+}
