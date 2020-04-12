@@ -69,6 +69,14 @@ All strings in the `src/` files should be localized like this:
 3. For JavaScript: call the `i18next.t("your-new-key")` function to retrieve the localized string (replace "your-new-key" in the example)
 4. Add any additional translations with the same key to other files in `src/i18n/`
 
+#### Adding new languages
+
+To add a new language
+
+1. Make a copy of an existing localization file (recommended: `src/i18n/en.json`), name it to match the new language (e.g. `ja.json`)
+2. Replace the translations in the file you just created
+3. Add the new language to the array of `LANGUAGES` in `src/i18n/index.js`
+
 ## License & Code Re-use
 
 The code for this project is released under the [MIT License](LICENSE). You are free to re-use it but we ask that you please include a link back to the [COVID-19 Japan website](https://covid19japan.com/) or [this GitHub repository](https://github.com/reustle/covid19japan). We'd also be happy to include your site in the list of forked projects below – just create an issue to request it.
