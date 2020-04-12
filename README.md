@@ -54,12 +54,13 @@ Start Server:
 npm run start
 ```
 
-
 ### Testing
 
 When testing your changes locally, be sure to verify both the `/` and `/embed` pages are working properly.
 
 ### Localization
+
+#### Localizing content
 
 All strings in the `src/` files should be localized like this:
 
@@ -67,6 +68,14 @@ All strings in the `src/` files should be localized like this:
 2. For HTML: add the `data-i18n="your-new-key"` attribute to the HTML element to be localized (replace "your-new-key" in the example)
 3. For JavaScript: call the `i18next.t("your-new-key")` function to retrieve the localized string (replace "your-new-key" in the example)
 4. Add any additional translations with the same key to other files in `src/i18n/`
+
+#### Adding new languages
+
+To add a new language
+
+1. Make a copy of an existing localization file (recommended: `src/i18n/en.json`), name it to match the new language (e.g. `ja.json`)
+2. Replace the translations in the file you just created
+3. Add the new language to the array of `LANGUAGES` in `src/i18n/index.js`
 
 ## License & Code Re-use
 
