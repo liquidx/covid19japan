@@ -38,7 +38,7 @@ export const LANG_CONFIG = {
   fallbackLng: "en",
   lowerCaseLng: true,
   detection: {
-    order: ["querystring", "navigator"],
+    order: ["querystring", "localStorage", "navigator"],
   },
   resources: languageResources,
 };
