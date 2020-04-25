@@ -1,0 +1,72 @@
+
+// Chart styles
+.c3 {
+  path, line {
+    fill: none;
+    stroke: #999999;
+    stroke-width: 1px;
+  }
+
+  .c3-chart-line {
+    stroke-width: 2px;
+  }
+
+  .c3-shapes {
+    fill: none;
+  }
+
+  .tick tspan,
+  .c3-axis-x-label,
+  .c3-axis-y-label {
+    fill: rgba(66, 66, 66, 1);
+    font-size: 10px;
+  }
+
+  .c3-axis .domain {
+    stroke: rgba(66, 66, 66, 1);
+  }
+}
+
+
+
+
+#tokyo-cities {
+  #tokyo-chart {
+    height: 600px;
+  }
+
+  #charts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    .chart {
+      width: 200px;
+      height: 200px;
+      margin: 10px 10px 10px 10px;
+    }  
+
+    .c3 .c3-legend-item text {
+      fill: #858585;
+      font-size: 12px;
+    }
+
+    .c3-lines .c3-line  {
+      stroke-width: 2px;
+    }
+
+    path, line {
+      fill: none;
+      stroke: #7e7e7e;
+      stroke-width: 1px;
+    }
+
+  }
+
+   #count-table {
+    td {
+      height: auto;
+      padding: 10px 5px;
+    }
+  }
+}

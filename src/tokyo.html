@@ -1,42 +1,116 @@
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
   <head>
-    <title>Tokyo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>Japan COVID-19 Coronavirus Tracker: Tokyo</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i,800&display=swap" rel="stylesheet">
+      <!-- Size specific PNG faviocons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png?v=1586005472">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png?v=1586005472">
+
+    <!-- iOS icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png?v=1586005472">
+    
+    <!-- MacOS Icon for Safari & Touchbar -->
+    <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg?v=1586005472" color="#8ecafb">
+    
+    <!-- Android Manifest -->
+    <link rel="manifest" href="/static/icons/site.webmanifest?v=1586005472">
+    
+    <!-- Windows Browserconfig -->
+    <meta name="msapplication-TileColor" content="#8ecafb">
+    <meta name="msapplication-config" content="/static/icons/browserconfig.xml?v=1586005472">
+    <meta name="theme-color" content="#8ecafb">
+
+    <meta
+      name="description"
+      content="Live updates of the Coronavirus COVID-19 outbreak in Japan"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://covid19japan.com/" />
+    <meta name="twitter:title" content="Japan COVID-19 Coronavirus Tracker" />
+
+    <meta
+      name="twitter:description"
+      content="Live updates of the Coronavirus COVID-19 outbreak in Japan"
+    />
+    <meta property="og:title" content="Japan COVID-19 Coronavirus Tracker" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://covid19japan.com/" />
+    <meta
+      property="og:image"
+      content="https://covid19japan.com/static/map.jpg"
+    />
+    <meta
+      property="og:description"
+      content="Live updates of the Coronavirus COVID-19 outbreak in Japan"
+    />
   </head>
-  <body>
-    <div id="page">
-      <header>
-        <h1>COVID19 Japan : Tokyo</h1>
-      </header>
-      <div id="tokyo-cities">
-        <h2>Total Confirmed Cases by Ward/City</h2>
-        <div class="explaination">
-          <p>Top 20 City/Ward by infected patients. (Data from Tokyo Metropolitan Government.)</p>
+  <body class="<%= htmlWebpackPlugin.options.bodyClass %>">
+    <script src="https://browser.sentry-cdn.com/5.12.1/bundle.min.js" integrity="sha384-y+an4eARFKvjzOivf/Z7JtMJhaN6b+lLQ5oFbBbUwZNNVir39cYtkjW1r6Xjbxg3" crossorigin="anonymous"></script>
+    <script src="https://browser.sentry-cdn.com/5.12.1/captureconsole.min.js"></script>
+    <script>
+      if (window.location.hostname == 'covid19japan.com') {
+        Sentry.init({
+          dsn: 'https://1c7127f5f5b2432d99a5bf44a3b74d08@sentry.io/2967034',
+          debug: false,
+    blacklistUrls: [
+      // Chrome extensions
+      /extensions\//i,
+      /^chrome:\/\//i,
+    ],
+          ignoreErrors: [
+      // Ignore Google Translate Chrome extension errors.
+      // See: https://medium.com/@amir.harel/a-b-target-classname-indexof-is-not-a-function-at-least-not-mine-8e52f7be64ca
+      "a[b].target.className.indexOf is not a function",
+    ],
+          integrations: [
+            new Sentry.Integrations.CaptureConsole({
+              levels: ['error']
+            })
+          ]
+        })
+      }
+    </script>
+
+    <header class="embed-hide">
+      <h1 data-i18n="covid-19-tracker">Tokyo : Japan COVID-19 Coronavirus Tracker</h1>
+      <div class="toolbar">
+        <div class="lang-picker">
+          <a href="#" data-lang-picker='en'>EN 🇺🇸</a> |
+          <a href="#" data-lang-picker='ja'>JP 🇯🇵</a>
         </div>
+        <em>
+          <span data-i18n="last-updated">Date:</span><strong id="last-updated">-</strong>
+        </em>
+      </div>
+    </header>
 
-        <div id="unified-chart"></div>
 
-        <h2>Confirmed cases growth by Ward/City</h2>
-        <div class="explaination">
-          <p>Breakdown per Tokyo ward/city.</p>
+    <div id="tokyo-cities"> 
+
+      <section id="prefecture-trajectory-container" class="large-chart-container">
+        <h4 data-i18n="">Tokyo Wards and Cities</h4>
+        <div id="tokyo-chart">
+          <div class="text-center"><div class="lds-dual-ring"></div></div>
         </div>
+      </section>
 
-        <div id="charts"></div>  
 
-        <h2>All confirmed cases</h2>
-
+      <section id="tokyo-table">
         <table id="count-table">
           <thead>
             <tr>
-              <td>City/Ward</td>
-              <td>Count</td>
-              <td>Last 24 hours</td>
+              <th>City/Ward</th>
+              <th>Confirmed</th>
+              <th>Increase</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
-
-      </div>
+      </section>
     </div>
-  
+
   </body>
 </html>
