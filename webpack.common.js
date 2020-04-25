@@ -8,7 +8,7 @@ module.exports = {
   mode: "development",
   entry: {
     index: ["./src/index.js", "./src/index.scss"],
-    tokyo: ["./src/tokyo.js", "./src/trends.scss"],
+    tokyo: ["./src/tokyo.js", "./src/index.scss", "./src/tokyo.scss"],
     ageTrends: ["./src/ageTrends.js", "./src/trends.scss"],
     deathTrends: ["./src/deathTrends.js", "./src/trends.scss"],
   },
