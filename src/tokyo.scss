@@ -64,9 +64,30 @@
   }
 
    #count-table {
+    th {
+      border-bottom: 0;
+    }
     td {
-      height: auto;
-      padding: 10px 5px;
+      height: 25px;
+      padding: 5px 5px;
+      font-size: 12px;
+    }
+
+    td.barline {
+      color: rgb(77, 1, 1);
+      background-size: auto 24px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      min-width: 250px;
+
+      font-size: 10px;
+      padding-left: 14px;
+      margin: 0 20px;
+    }
+
+    th.cityname, td.cityname {
+      text-align: right;
+      max-width: 180px;
     }
   }
 }

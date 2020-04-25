@@ -15,6 +15,7 @@ export const COLOR_RED = "rgb(244,67,54)";
 export const COLOR_BURGUNDY = "rgb(186,0,13)";
 export const COLOR_BLACK = "rgba(0,0,0,1)";
 export const COLOR_NONE = "rgba(255, 255, 255, 0)";
+export const COLOR_CONFIRMED_LIGHT = "rgb(241, 107, 98)";
 export const PREFECTURE_JSON_PATH = "static/prefectures.geojson";
 export const JSON_PATH = "https://data.covid19japan.com/summary/latest.json";
 export const PAGE_TITLE = "Coronavirus Disease (COVID-19) Japan Tracker";

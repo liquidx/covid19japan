@@ -9,16 +9,11 @@ import toggleLangPicker from "./components/Header/ToggleLangPicker";
 import { renderWholeTokyoChart } from "./components/Tokyo/TokyoChart";
 import { renderWardTable } from "./components/Tokyo/TokyoTable";
 
-import {
-  LANG_CONFIG,
-  JSON_PATH,
-  SUPPORTED_LANGS,
-  DDB_COMMON,
-} from "./data/constants";
+import { LANG_CONFIG, SUPPORTED_LANGS } from "./data/constants";
 
 const localize = locI18next.init(i18next);
 let LANG = "en";
-let TOKYO_COUNT_DATA = {};
+let TOKYO_COUNT_DATA = [];
 
 const setLang = (lng) => {
   if (lng && lng.length > 1) {
@@ -33,7 +28,9 @@ const setLang = (lng) => {
   toggleLangPicker(LANG);
   i18next.changeLanguage(LANG).then(() => {
     localize("html");
-    renderPage(TOKYO_COUNT_DATA);
+    if (TOKYO_COUNT_DATA && TOKYO_COUNT_DATA.length) {
+      renderPage(TOKYO_COUNT_DATA);
+    }
   });
 };
 
@@ -85,7 +82,9 @@ const renderPage = (tokyoCountData) => {
   renderWholeTokyoChart("#tokyo-chart", tokyoCountData);
 
   let tableBody = document.querySelector("table#count-table tbody");
-  tableBody.innerHTML = "";
+  if (tableBody) {
+    tableBody.innerHTML = "";
+  }
   renderWardTable("table#count-table tbody", tokyoCountData);
 };
 

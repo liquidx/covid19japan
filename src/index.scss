@@ -15,9 +15,15 @@ body {
   font-size: 16px;
 }
 h1 {
-  font-size: 48px;
+  font-size: 24px;
   font-weight: 800;
 }
+h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: rgb(128, 122, 122);
+}
+
 h4 {
   font-size: 21px;
   margin-bottom: 20px;
@@ -71,9 +77,6 @@ header {
 
 a, a:hover, a:visited {
   color: #000a12;
-}
-h1 {
-  font-size: 24px;
 }
 .text-center {
   text-align: center;

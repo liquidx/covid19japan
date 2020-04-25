@@ -29,13 +29,13 @@
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://covid19japan.com/" />
-    <meta name="twitter:title" content="Japan COVID-19 Coronavirus Tracker" />
+    <meta name="twitter:title" content="Japan COVID-19 Coronavirus Tracker: Tokyo" />
 
     <meta
       name="twitter:description"
       content="Live updates of the Coronavirus COVID-19 outbreak in Japan"
     />
-    <meta property="og:title" content="Japan COVID-19 Coronavirus Tracker" />
+    <meta property="og:title" content="Japan COVID-19 Coronavirus Tracker: Tokyo" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://covid19japan.com/" />
     <meta
@@ -55,16 +55,16 @@
         Sentry.init({
           dsn: 'https://1c7127f5f5b2432d99a5bf44a3b74d08@sentry.io/2967034',
           debug: false,
-    blacklistUrls: [
-      // Chrome extensions
-      /extensions\//i,
-      /^chrome:\/\//i,
-    ],
-          ignoreErrors: [
-      // Ignore Google Translate Chrome extension errors.
-      // See: https://medium.com/@amir.harel/a-b-target-classname-indexof-is-not-a-function-at-least-not-mine-8e52f7be64ca
-      "a[b].target.className.indexOf is not a function",
-    ],
+          blacklistUrls: [
+            // Chrome extensions
+            /extensions\//i,
+            /^chrome:\/\//i,
+          ],
+                ignoreErrors: [
+            // Ignore Google Translate Chrome extension errors.
+            // See: https://medium.com/@amir.harel/a-b-target-classname-indexof-is-not-a-function-at-least-not-mine-8e52f7be64ca
+            "a[b].target.className.indexOf is not a function",
+          ],
           integrations: [
             new Sentry.Integrations.CaptureConsole({
               levels: ['error']
@@ -75,7 +75,8 @@
     </script>
 
     <header class="embed-hide">
-      <h1 data-i18n="covid-19-tracker">Tokyo : Japan COVID-19 Coronavirus Tracker</h1>
+      <h1 data-i18n="covid-19-tracker">Japan COVID-19 Coronavirus Tracker</h1>
+      <h2 data-i18n="covid-19-tokyo-title">Tokyo breakdown</h2>
       <div class="toolbar">
         <div class="lang-picker">
           <a href="#" data-lang-picker='en'>EN 🇺🇸</a> |
@@ -91,7 +92,7 @@
     <div id="tokyo-cities"> 
 
       <section id="prefecture-trajectory-container" class="large-chart-container">
-        <h4 data-i18n="">Tokyo Wards and Cities</h4>
+        <h4 data-i18n="">Confirmed cases in Tokyo</h4>
         <div id="tokyo-chart">
           <div class="text-center"><div class="lds-dual-ring"></div></div>
         </div>
@@ -102,7 +103,7 @@
         <table id="count-table">
           <thead>
             <tr>
-              <th>City/Ward</th>
+              <th class="cityname">City/Ward</th>
               <th>Confirmed</th>
               <th>Increase</th>
             </tr>
