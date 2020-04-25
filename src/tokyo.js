@@ -6,7 +6,6 @@ import locI18next from "loc-i18next";
 
 import toggleLangPicker from "./components/Header/ToggleLangPicker";
 
-import { renderWholeTokyoChart } from "./components/Tokyo/TokyoChart";
 import { renderWardTable } from "./components/Tokyo/TokyoTable";
 
 import { LANG_CONFIG, SUPPORTED_LANGS } from "./data/constants";
@@ -77,14 +76,11 @@ const renderCityCharts = (tokyoCounts) => {
 };
 
 const renderPage = (tokyoCountData) => {
-  let chart = document.querySelector("#tokyo-chart");
-  chart.innerHTML = "";
-  renderWholeTokyoChart("#tokyo-chart", tokyoCountData);
-
   let tableBody = document.querySelector("table#count-table tbody");
   if (tableBody) {
     tableBody.innerHTML = "";
   }
+  console.log(tableBody);
   renderWardTable("table#count-table tbody", tokyoCountData);
 };
 
