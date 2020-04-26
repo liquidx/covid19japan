@@ -99,8 +99,17 @@ h2 {
 }
 
 #death-trend {
+  .chart {
+    width: 600px;
+    height: 600px;
+  }
+
   .c3 .c3-legend-item-tile {
     stroke-width: 10px;
+  }
+
+  path.c3-line {
+    stroke-width: 2px;
   }
 
   .c3 .c3-legend-item text {
