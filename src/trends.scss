@@ -24,7 +24,7 @@ h2 {
   margin-top: 40px;
 }
 
-.explaination {
+.explaination, .explanation {
   font-size: 0.8em;
   max-width: 400px;
 }
@@ -76,32 +76,12 @@ h2 {
     width: 500px;
     height: 500px;
   }
-
-  .chart-date-slider {
-    width: 500px;
-
-    #chart-date-label {
-      font-size: 0.8em;
-      padding: 10px 0;
-    }
-
-    .rangeslider__fill,
-    .rangeslider__handle {
-      background: rgba(200, 0, 0, 1);
-    }
-
-    .rangslide__handle:active {
-      background: rgba(200, 0, 0, 0.5);
-    }
-
-
-  }
 }
 
 #death-trend {
-  .chart {
+  .chart, .cases-and-deaths-chart {
     width: 600px;
-    height: 600px;
+    height: 400px;
   }
 
   .c3 .c3-legend-item-tile {
@@ -115,5 +95,22 @@ h2 {
   .c3 .c3-legend-item text {
     fill: #aaaaaa;
     font-size: 10px;
+  }
+}
+
+.chart-date-slider, .chart-scale-slider {
+  width: 500px;
+
+  #chart-date-label {
+    font-size: 0.8em;
+    padding: 10px 0;
+  }
+  .rangeslider__fill,
+  .rangeslider__handle {
+    background: rgba(200, 0, 0, 1);
+  }
+
+  .rangslide__handle:active {
+    background: rgba(200, 0, 0, 0.5);
   }
 }

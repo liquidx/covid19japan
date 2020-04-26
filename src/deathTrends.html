@@ -8,11 +8,36 @@
         <h1>COVID19 Japan Trends</h1>
       </header>
       <div id="death-trend">
+
+        <h2>COVID19 Japan Confirmed Cases vs Deaths</h2>
+        <div class="explanation">
+          <p>Comparing confirmed cases and deaths together. Deaths are grey and confirmed cases are red.
+             An artifical date offset and scale factor are applied to deaths so they appear more exaggerated 
+             in order to see the better against confirmed cases.</p>
+          </p>
+        </div>
+        <div class="chart-date-slider">
+          <div class="explanation">
+            Deaths offset by <span id="date-offset">16</span> days.
+          </div>
+          <input id="date-slider" type="range">
+        </div>
+        <div class="chart-scale-slider">
+          <div class="explanation">
+            Deaths scaled by <span id="scale-factor">25</span>x.
+          </div>
+          <input id="scale-slider" type="range">
+        </div>
+
+        <div class="cases-and-deaths-chart"></div>  
+
         <h2>COVID19 Japan Death Trend</h2>
-        <div class="explaination">
-          <p></p>
+
+        <div class="explanation">
+          <p>Simple chart of deaths with a moving 7-day average.</p>
         </div>
         <div class="chart"></div>  
+
       </div>
     </div>
   

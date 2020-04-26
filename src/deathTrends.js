@@ -1,7 +1,13 @@
 import _ from "lodash";
 import c3 from "c3";
 
-import { COLOR_DECEASED } from "./data/constants.js";
+import {
+  COLOR_DECEASED,
+  COLOR_ACTIVE,
+  COLOR_TESTED,
+  COLOR_CONFIRMED,
+} from "./data/constants.js";
+import rangesliderJs from "rangeslider-js";
 
 const generateDeathDataset = (patients) => {
   let deathsByDay = {};
@@ -129,6 +135,116 @@ const renderDeaths = (deaths) => {
   });
 };
 
+let _casesAndDeathsChart = null;
+let _summaryData = null;
+let _deathsDateOffset = 12;
+let _deathsScaleFactor = 25;
+
+const renderCasesAndDeaths = (summary, deathsOffsetDays, deathsScaleFactor) => {
+  const period = 60;
+  console.log(deathsScaleFactor);
+  let dateDataset = _.map(summary.daily, "date");
+  let confirmedDataset = _.map(summary.daily, "confirmed");
+  let deathsDataset = _.map(summary.daily, (o) => {
+    return -1 * o.deceased * deathsScaleFactor;
+  });
+
+  dateDataset = _.slice(
+    dateDataset,
+    summary.daily.length - period,
+    summary.daily.length - 1
+  );
+  confirmedDataset = _.slice(
+    confirmedDataset,
+    summary.daily.length - period,
+    summary.daily.length - 1
+  );
+  deathsDataset = _.slice(
+    deathsDataset,
+    summary.daily.length - period,
+    summary.daily.length - 1
+  );
+
+  let confirmedAvgDataset = movingAverage(confirmedDataset, 7);
+  let deathsAvgDataset = movingAverage(deathsDataset, 7);
+
+  // Apply date offset
+  deathsAvgDataset = _.slice(
+    _.map(deathsAvgDataset, (o) => {
+      return o * -1;
+    }),
+    deathsOffsetDays
+  );
+  deathsDataset = _.slice(deathsDataset, deathsOffsetDays);
+
+  dateDataset = _.concat(["date"], dateDataset);
+  confirmedDataset = _.concat(["confirmed"], confirmedDataset);
+  deathsDataset = _.concat(["deaths"], deathsDataset);
+  confirmedAvgDataset = _.concat(["confirmedAvg"], confirmedAvgDataset);
+  deathsAvgDataset = _.concat(["deathsAvg"], deathsAvgDataset);
+
+  let chartElement = document.querySelector(
+    "#death-trend .cases-and-deaths-chart"
+  );
+  if (_casesAndDeathsChart) {
+    _casesAndDeathsChart.destroy();
+  }
+  _casesAndDeathsChart = c3.generate({
+    bindto: chartElement,
+    padding: { top: 20, bottom: 20, left: 60, right: 0 },
+    transition: { duration: 0 },
+    tooltip: { show: false },
+    legend: { show: true },
+    point: { show: false },
+    x: "date",
+    data: {
+      x: "date",
+      columns: [
+        dateDataset,
+        confirmedDataset,
+        deathsDataset,
+        confirmedAvgDataset,
+        deathsAvgDataset,
+      ],
+      colors: {
+        confirmed: COLOR_CONFIRMED,
+        deaths: COLOR_TESTED,
+        confirmedAvg: COLOR_ACTIVE,
+        deathsAvg: COLOR_DECEASED,
+      },
+      type: "bar",
+      types: {
+        confirmedAvg: "spline",
+        deathsAvg: "spline",
+      },
+    },
+    bar: {
+      width: { ratio: 0.8 },
+    },
+    axis: {
+      x: {
+        type: "timeseries",
+        tick: { format: "%m/%d" },
+      },
+      y: {
+        tick: {
+          format: (y) => {
+            if (y < 0) {
+              let realDeaths = parseInt((-1 * y) / deathsScaleFactor);
+              return `Deaths ${realDeaths}`;
+            }
+            return y;
+          },
+        },
+      },
+    },
+  });
+};
+
+const updateWithSliderValues = (dateOffset, scaleFactor) => {
+  renderCasesAndDeaths(_summaryData, dateOffset, scaleFactor);
+};
+
 const main = () => {
   fetch("http://localhost:3999/patient_data/latest.json")
     .then((response) => response.json())
@@ -136,6 +252,41 @@ const main = () => {
       let deathDataset = generateDeathDataset(patients);
       renderDeaths(deathDataset);
     });
+
+  fetch("http://localhost:3999/summary/latest.json")
+    .then((response) => response.json())
+    .then((summary) => {
+      _summaryData = summary;
+      updateWithSliderValues(_deathsDateOffset, _deathsScaleFactor);
+    });
+
+  rangesliderJs.create(document.querySelector("#date-slider"), {
+    min: 0,
+    max: 30,
+    value: _deathsDateOffset,
+    step: 1,
+    onSlide: (value, percent, position) => {
+      document.querySelector("#date-offset").innerText = value;
+      _deathsDateOffset = parseInt(value);
+      updateWithSliderValues(_deathsDateOffset, _deathsScaleFactor);
+    },
+  });
+
+  rangesliderJs.create(document.querySelector("#scale-slider"), {
+    min: 1,
+    max: 50,
+    value: _deathsScaleFactor,
+    step: 1,
+    onSlide: (value, percent, position) => {
+      document.querySelector("#scale-factor").innerText = value;
+      _deathsScaleFactor = parseInt(value);
+      updateWithSliderValues(_deathsDateOffset, _deathsScaleFactor);
+    },
+  });
+
+  let rangeSliderFill = document.querySelector(".rangeslider__fill");
+  rangeSliderFill.style.background =
+    "linear-gradient(90deg, rgba(253,174,97,1) 0%, rgba(158,1,66,1) 100%)";
 };
 
 window.onload = main;
