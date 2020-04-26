@@ -137,12 +137,11 @@ const renderDeaths = (deaths) => {
 
 let _casesAndDeathsChart = null;
 let _summaryData = null;
-let _deathsDateOffset = 12;
-let _deathsScaleFactor = 25;
+let _deathsDateOffset = 10;
+let _deathsScaleFactor = 30;
 
 const renderCasesAndDeaths = (summary, deathsOffsetDays, deathsScaleFactor) => {
   const period = 60;
-  console.log(deathsScaleFactor);
   let dateDataset = _.map(summary.daily, "date");
   let confirmedDataset = _.map(summary.daily, "confirmed");
   let deathsDataset = _.map(summary.daily, (o) => {
