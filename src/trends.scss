@@ -78,6 +78,12 @@ h2 {
   }
 }
 
+a#age-trend-start-stop {
+  font-size: 14px;
+  text-decoration: none;
+  color: rgba(200, 0, 0, 1);
+}
+
 #death-trend {
   .chart, .cases-and-deaths-chart {
     width: 600px;
