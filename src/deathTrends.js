@@ -245,14 +245,14 @@ const updateWithSliderValues = (dateOffset, scaleFactor) => {
 };
 
 const main = () => {
-  fetch("http://localhost:3999/patient_data/latest.json")
+  fetch("https://data.covid19japan.com/patient_data/latest.json")
     .then((response) => response.json())
     .then((patients) => {
       let deathDataset = generateDeathDataset(patients);
       renderDeaths(deathDataset);
     });
 
-  fetch("http://localhost:3999/summary/latest.json")
+  fetch("https://data.covid19japan.com/summary/latest.json")
     .then((response) => response.json())
     .then((summary) => {
       _summaryData = summary;
