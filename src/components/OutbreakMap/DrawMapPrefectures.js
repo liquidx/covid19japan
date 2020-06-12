@@ -147,9 +147,11 @@ const drawMapPrefectures = (ddb, map) => {
       const confirmed = thisPrefecture.confirmed;
       const deaths = thisPrefecture.deaths;
       const recovered = thisPrefecture.recovered;
-      const active =
+      const active = Math.max(
+        0,
         thisPrefecture.confirmed -
-        ((thisPrefecture.recovered || 0) + (thisPrefecture.deaths || 0));
+          ((thisPrefecture.recovered || 0) + (thisPrefecture.deaths || 0))
+      );
       const html = `<div class="map-popup">
       <h3 data-i18n="prefectures.${name}">${i18next.t(
         "prefectures." + name
